@@ -37,7 +37,7 @@ Route::get('/view-book', [ReaderController::class,  'viewBook']);
 
 Route::get('/collection', [BookController::class, 'show'])->name('custhome');
 
-Route::get('/detail-book/{id}', [BookController::class, 'showBook'])->name('detail');
+Route::get('/detail-book/{book}', [BookController::class, 'showBook'])->name('bookdetail');
 
 Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('payment');
 

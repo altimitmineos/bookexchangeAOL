@@ -18,8 +18,8 @@
                             <tr>
                                 <th>cover</th>
                                 <th>Title</th>
-                                <th>category</th>
-                                <th>detail</th>
+                                <th>Category</th>
+                                <th>Cost</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,7 +30,8 @@
                                     </td>
                                     <td>{{$book->Title}}</td>
                                     <td>{{$book->category->CategoryName}}</td>
-                                    <td><a class="btn btn-outline-dark" href=" ">detail</a></td>
+                                    <td>{{$book->Cost }}</td>
+                                    <td><a class="btn btn-outline-dark" href="{{ route('bookdetail', ['book'=>$book->id]) }}">detail</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

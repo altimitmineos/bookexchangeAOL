@@ -11,7 +11,7 @@ class BookController extends Controller
     //
     public function createBook(){
         $categories = Category::all();
-        return view('CreateBook', compact('categories'));
+        return view('admin.createbook', compact('categories'));
     }
 
     public function storeBook (Request $request){
@@ -53,28 +53,28 @@ class BookController extends Controller
 
     public function show(){
         $books = Book::all(); //ambil semua data yang ada di model book
-        return view('admin', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
+        return view('admin.admin', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
     }
 
     public function showCollection(){
         $books = Book::all(); //ambil semua data yang ada di model book
-        return view('home', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
+        return view('admin.home', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
     }
 
     public function showBook($id){
         $book = Book::findOrFail($id);
-        return view('bookdetail', compact('book') );
+        return view('admin.bookdetail', compact('book') );
     }
 
     public function showPayment($id){
         $book = Book::findOrFail($id);
-        return view('payment', compact('book') );
+        return view('admin.payment', compact('book') );
     }
 
     public function edit($id){
         $categories = Category::all();
         $book = Book::findOrFail($id);
-        return view('editbook', compact('book'), compact('categories') );
+        return view('admin.editbook', compact('book'), compact('categories') );
     }
 
     public function update (Request $request, $id){

@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('admin.admin')
 @section('content')
     <div class="container">
         @if (session('success'))
@@ -10,7 +10,7 @@
 
         <!-- Books Section -->
         <div class="movies-section">
-            <h2 class="text-center mb-4">Book List</h2>
+            <h2 class="mb-4 text-center">Book List</h2>
             <div class="row">
                 <div class="col">
                     <table class="table">
@@ -42,7 +42,7 @@
         </div>
 
         {{-- <!-- Pagination -->
-        <div class="d-flex justify-content-center mt-4">
+        <div class="mt-4 d-flex justify-content-center">
             {{$books->links('pagination::bootstrap-4')}}
         </div> --}}
     </div>

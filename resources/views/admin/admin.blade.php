@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-white bg-white mb-4">
+    <nav class="mb-4 bg-white navbar navbar-expand-lg navbar-white">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 bookexchange.com
@@ -57,7 +57,7 @@
                         <a class="nav-link" href="{{ route('createcategory') }}">Add Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Sign Out</a>
+                        <a class="nav-link" href="{{ route('dashboard') }}">Sign Out</a>
                     </li>
                 </ul>
             </div>

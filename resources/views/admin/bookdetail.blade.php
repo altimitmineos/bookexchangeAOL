@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('admin.admin')
 @section('content')
     <div class="book-detail">
         <div class="book-image">

@@ -1,10 +1,10 @@
-@extends('admin')
+@extends('admin.admin')
 @section('content')
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow">
-                    <div class="card-header bg-dark text-white">
+                <div class="shadow card">
+                    <div class="text-white card-header bg-dark">
                         <h4 class="mb-0">Add New Book</h4>
                     </div>
                     <div class="card-body">
@@ -121,7 +121,7 @@
                                 @enderror
                             </div>
 
-                            <div class="d-grid gap-2">
+                            <div class="gap-2 d-grid">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-save me-2"></i>Save Book
                                 </button>

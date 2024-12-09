@@ -1,0 +1,85 @@
+/* Background */
+body {
+    background: linear-gradient(135deg, #a0c4ff, #f8d7b9);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Kontainer Register */
+.register-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Bagian Kiri */
+.register-left {
+    flex: 1;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-left img {
+    max-width: 90%;
+    height: auto;
+}
+
+/* Bagian Kanan */
+.register-right {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h4 {
+    margin-bottom: 30px;
+}
+
+/* Pedoman Kata Sandi */
+.password-guide {
+    list-style-type: none;
+    padding: 0;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.password-guide li {
+    margin-bottom: 5px;
+}
+
+/* Tombol */
+button {
+    background-color: #007bff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Link */
+a {
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}

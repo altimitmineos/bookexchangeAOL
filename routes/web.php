@@ -48,6 +48,7 @@ Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('
 
 Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
 
+// Rute Dashboard, Profile, Login, dan Register
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -66,4 +67,3 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::get('/register', [RegisteredUserController::class, 'create'])
     ->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
-

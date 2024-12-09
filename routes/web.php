@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [BookController::class, 'show'])->name('home');
+Route::get('/', [BookController::class, 'showCollection'])->name('home');
 
 Route::get('/create-book', [BookController::class, 'createBook'])->name('createbook');
 
@@ -35,7 +35,7 @@ Route::get('/view-reader', [ReaderController::class, 'viewReader']);
 
 Route::get('/view-book', [ReaderController::class,  'viewBook']);
 
-Route::get('/collection', [BookController::class, 'showCollection'])->name('custhome');
+Route::get('/collection', [BookController::class, 'show'])->name('custhome');
 
 Route::get('/detail-book/{id}', [BookController::class, 'showBook'])->name('detail');
 

@@ -26,12 +26,11 @@
                 <li><strong>Penerbit:</strong> {{ $book->Publisher }}</li>
                 <li><strong>ISBN:</strong> {{ $book->ISBN }}</li>
                 <li><strong>Tanggal Terbit:</strong> {{ \Carbon\Carbon::parse($book->PublicationDate)->format('d/m/Y') }}</li>
-                <li><strong>Berat:</strong> {{ $book->PrintWeight }} kg</li>
-                <li><strong>Dimensi:</strong> {{ $book->printWidth }} x {{ $book->printLength }} cm</li>
+                <li><strong>Berat:</strong> {{ $book->PrintWeight }}/li>
+                <li><strong>Dimensi:</strong> {{ $book->printWidth }} x {{ $book->printLength }}</li>
                 <li><strong>Stock:</strong> {{ $book->Stock }}</li>
             </ul>
         </div>
     </div>
-
 </body>
 </html>

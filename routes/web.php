@@ -19,8 +19,27 @@ use App\Http\Controllers\Auth\RegisterController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Rute Dashboard, Profile, Login, dan Register
+Route::get('/', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', [BookController::class, 'showCollection'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Rute Login dan Register
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+Route::get('/register', [RegisteredUserController::class, 'create'])
+    ->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
+
+Route::get('/dashboard', [BookController::class, 'showCollection'])->name('home');
 
 Route::get('/create-book', [BookController::class, 'createBook'])->name('createbook');
 
@@ -48,22 +67,3 @@ Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('
 
 Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
 
-// Rute Dashboard, Profile, Login, dan Register
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-// Rute Login dan Register
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-    ->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-
-Route::get('/register', [RegisteredUserController::class, 'create'])
-    ->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store']);

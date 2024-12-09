@@ -56,6 +56,11 @@
                     </div>
                 </div>
             </div>
+            <div class="d-grid">
+                <a href="{{ route('home') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Home
+                </a>
+            </div>
         </div>
     </div>
     @endsection

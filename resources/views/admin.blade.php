@@ -55,7 +55,7 @@
                         <a class="nav-link" href="{{ route('createcategory') }}">Add Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Book List</a>
+                        <a class="nav-link" href="">Sign Out</a>
                     </li>
                 </ul>
             </div>

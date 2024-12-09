@@ -156,7 +156,7 @@ class BookSeeder extends Seeder
                 'Page' => 141,
                 'Category_id' => 4,
                 'Formats_id' => 1,
-                'Image' => 'images/anyeong.jpg',
+                'Image' => 'images/anyeong.jpeg',
                 'Stock' => 8,
                 'Cost' => 'Rp. 25.000'
             ],

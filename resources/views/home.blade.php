@@ -17,7 +17,7 @@
                         <thead>
                             <tr>
                                 <th>cover</th>
-                                <th>name</th>
+                                <th>Title</th>
                                 <th>category</th>
                                 <th>detail</th>
                             </tr>
@@ -28,21 +28,21 @@
                                     <td>
                                         <img src="{{ asset($book->Image) }}" alt="" width="80px">
                                     </td>
-                                    <td>{{$book->name}}</td>
-                                    <td>{{$book->category->name}}</td>
+                                    <td>{{$book->Title}}</td>
+                                    <td>{{$book->category->CategoryName}}</td>
                                     <td><a class="btn btn-outline-dark" href=" ">detail</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{$books->links()}}
+                    {{-- {{$books->links()}} --}}
                 </div>
             </div>
         </div>
 
-        <!-- Pagination -->
+        {{-- <!-- Pagination -->
         <div class="d-flex justify-content-center mt-4">
             {{$books->links('pagination::bootstrap-4')}}
-        </div>
+        </div> --}}
     </div>
 @endsection

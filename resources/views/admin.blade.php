@@ -53,7 +53,7 @@
                         <a class="nav-link" href="{{ route('createbook') }}">Add Book</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Add Category</a>
+                        <a class="nav-link" href="{{ route('createcategory') }}">Add Category</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Book List</a>

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('Publisher');
             $table->integer('PrintWeight');
             $table->integer('printWidth');
-            $table->integer('printLeight');
+            $table->integer('printLength');
             $table->integer('Page');
             $table->unsignedBigInteger('Category_Id');
             $table->foreign('Category_Id')->references('id')->on('categories');

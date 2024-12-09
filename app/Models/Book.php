@@ -17,7 +17,7 @@ class Book extends Model
         'Publisher',
         'PrintWeight',
         'PrintWidth',
-        'PrintLeigth',
+        'PrintLength',
         'Page',
         'Category_Id',
         'Format_Id',

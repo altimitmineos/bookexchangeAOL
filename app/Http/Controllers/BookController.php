@@ -22,7 +22,10 @@ class BookController extends Controller
             'Author'=> 'required|min:5',
             'ISBN'=> 'required|min:13|integer',
             'Publisher'=> 'required|min:5',
+            'PrintWeight'=> 'required|integer|gt:15',
+            'PrintWidth'=> 'required|integer|gt:15',
             'PrintLength'=> 'required|integer|gt:15',
+            'Page'=> 'required|integer|gt:15',
             'Stock'=> 'required|integer|gt:0',
             'Image'=> 'required|mimes:png,jpg,jpeg'
         ]);
@@ -36,8 +39,12 @@ class BookController extends Controller
             'Author'=> $request->Author,
             'ISBN'=> $request->ISBN,
             'Publisher'=> $request->Publisher,
+            'PrintWeight'=> $request->PrintWeight,
+            'PrintWidth'=> $request->PrintWidth,
             'PrintLength'=> $request->PrintLength,
+            'Page'=> $request->Page,
             'Category_Id'=> $request->CategoryName,
+            'Format_Id'=> $request->FormatName,
             'Stock'=> $request->Stock,
             'Image'=> $fileName
         ]);
@@ -78,7 +85,10 @@ class BookController extends Controller
             'Author'=> 'required|min:5',
             'ISBN'=> 'required|min:13|integer',
             'Publisher'=> 'required|min:5',
+            'PrintWeight'=> 'required|integer|gt:15',
+            'PrintWidth'=> 'required|integer|gt:15',
             'PrintLength'=> 'required|integer|gt:15',
+            'Page'=> 'required|integer|gt:15',
             'Stock'=> 'required|integer|gt:5',
             'Image'=> 'required|mimes:png,jpg'
         ]);
@@ -93,8 +103,12 @@ class BookController extends Controller
             'Author'=> $request->Author,
             'ISBN'=> $request->ISBN,
             'Publisher'=> $request->Publisher,
+            'PrintWeight'=> $request->PrintWeight,
+            'PrintWidth'=> $request->PrintWidth,
             'PrintLength'=> $request->PrintLength,
+            'Page'=> $request->Page,
             'Category_Id'=> $request->CategoryName,
+            'Format_Id'=> $request->FormatName,
             'Stock'=> $request->Stock,
             'Image'=> $fileName
         ]);
@@ -131,8 +145,12 @@ class BookController extends Controller
             'Author'=> $request->Author,
             'ISBN'=> $request->ISBN,
             'Publisher'=> $request->Publisher,
-            'Printlength'=> $request->PrintLength,
-            'Category_Id'=> $request->Category_Id,
+            'PrintWeight'=> $request->PrintWeight,
+            'PrintWidth'=> $request->PrintWidth,
+            'PrintLength'=> $request->PrintLength,
+            'Page'=> $request->Page,
+            'Category_Id'=> $request->CategoryName,
+            'Format_Id'=> $request->FormatName,
             'Stock'=> $request->Stock,
             'Image'=> $fileName
         ]);
@@ -151,8 +169,12 @@ class BookController extends Controller
             'Author'=> $request->Author,
             'ISBN'=> $request->ISBN,
             'Publisher'=> $request->Publisher,
-            'Printlength'=> $request->PrintLength,
-            'Category_Id'=> $request->Category_Id,
+            'PrintWeight'=> $request->PrintWeight,
+            'PrintWidth'=> $request->PrintWidth,
+            'PrintLength'=> $request->PrintLength,
+            'Page'=> $request->Page,
+            'Category_Id'=> $request->CategoryName,
+            'Format_Id'=> $request->FormatName,
             'Stock'=> $request->Stock,
             'Image'=> $fileName
         ]);

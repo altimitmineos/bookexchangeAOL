@@ -29,7 +29,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 1,
                 'Formats_id' => 1,
                 'Image' => 'images/RisingShield.jpeg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 80.000'
             ],
             [
                 'Title' => 'Koloni Rajasa and the Flag Bearer',
@@ -44,7 +45,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 1,
                 'Formats_id' => 1,
                 'Image' => 'images/Rajasa.jpg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 35.000'
             ],
             [
                 'Title' => 'Overload Vol 2',
@@ -59,7 +61,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 1,
                 'Formats_id' => 1,
                 'Image' => 'images/Overload.jpeg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 55.000'
             ],
             [
                 'Title' => 'Cerobong Tua Terus Mendera',
@@ -74,7 +77,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 2,
                 'Formats_id' => 1,
                 'Image' => 'images/Cerombong.jpeg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 65.000'
             ],
             [
                 'Title' => 'Tanpa Rencana',
@@ -89,7 +93,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 2,
                 'Formats_id' => 2,
                 'Image' => 'images/TanpaRencana.jpeg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 95.000'
             ],
             [
                 'Title' => 'Cerpen Pilihan Kompas 2002 Jejak Tanah',
@@ -104,7 +109,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 2,
                 'Formats_id' => 1,
                 'Image' => 'images/Cerpen.jpg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 23.000'
             ],
             [
                 'Title' => 'Melody Pop Hits : Piano & Gitar',
@@ -119,7 +125,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 3,
                 'Formats_id' => 1,
                 'Image' => 'images/melody.jpeg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 40.000'
             ],
             [
                 'Title' => 'Moshi Moshi Japan',
@@ -134,7 +141,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 4,
                 'Formats_id' => 3,
                 'Image' => 'images/moshi.jpg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 75.000'
             ],
             [
                 'Title' => 'Annyeong, Korean Fever!',
@@ -149,7 +157,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 4,
                 'Formats_id' => 1,
                 'Image' => 'images/anyeong.jpg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 25.000'
             ],
             [
                 'Title' => 'K-Pop Dictionary Gaul',
@@ -164,7 +173,8 @@ class BookSeeder extends Seeder
                 'Category_id' => 4,
                 'Formats_id' => 1,
                 'Image' => 'images/kpop.jpeg',
-                'Stock' => 8
+                'Stock' => 8,
+                'Cost' => 'Rp. 20000'
             ],
         ];
 

@@ -27,7 +27,7 @@ Route::patch('/update-book/{id}', [BookController::class, 'update'])->name('upda
 
 Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('delete');
 
-Route::get('/create-category', [CategoryController::class, 'createCategory']);
+Route::get('/create-category', [CategoryController::class, 'createCategory'])->name('createcategory');
 
 Route::post('/store-category', [CategoryController::class, 'storeCategory']);
 

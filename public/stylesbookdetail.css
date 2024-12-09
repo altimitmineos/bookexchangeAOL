@@ -1,0 +1,51 @@
+.book-detail {
+    display: flex;
+    padding-top: 50px;
+    padding-left: 60px;
+    font-family: 'Urbanist';
+}
+
+.book-image {
+    width: 30%;
+}
+
+.book-image img{
+    width: 400px;
+    height: auto;
+}
+
+.book-info {
+    width: 70%;
+}
+
+.author{
+    color: #5A6166;
+    margin-bottom: 0px;
+}
+
+.Title{
+    color: #5A6166;
+}
+
+.book-info h1 {
+    font-size: 2em;
+}
+
+.book-info h2 {
+    color: black;
+    font-weight: bold;
+}
+
+.book-info ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.favorite-btn, .share-btn {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

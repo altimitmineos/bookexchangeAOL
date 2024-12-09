@@ -13,18 +13,18 @@
             font-weight: ;
             color: #727C9E !important;
         }
-        
+
         .navbar {
             box-shadow: 0 2px 4px rgba(0,0,0,.1);
         }
-        
+
         footer {
             background-color: #D4D7D9;
             color: black;
             padding: 2rem 0;
             margin-top: 3rem;
         }
-        
+
         .main-content {
             min-height: calc(100vh - 200px);
         }
@@ -88,7 +88,7 @@
             </div>
         </div>
     </footer>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

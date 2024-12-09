@@ -113,6 +113,14 @@
                                 @enderror
                             </div>
 
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label">Cost</label>
+                                <input type="text" value="{{old('Cost')}}" class="form-control @error('Cost') is-invalid @enderror" id="exampleInputPassword1" name="Cost">
+                                @error('Cost')
+                                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                                @enderror
+                            </div>
+
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-save me-2"></i>Save Book

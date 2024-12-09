@@ -19,6 +19,7 @@ class Book extends Model
         'PrintWidth',
         'PrintLength',
         'Page',
+        'Cost',
         'Category_Id',
         'Format_Id',
         'Stock',
@@ -27,6 +28,11 @@ class Book extends Model
 
     public function category(){
         return $this->belongsTo(Category::class, 'Category_Id');
+    }
+
+    public function format()
+    {
+        return $this->belongsTo(Format::class, 'Formats_Id');
     }
 
     public function readers(){

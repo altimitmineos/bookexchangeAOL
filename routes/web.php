@@ -47,11 +47,11 @@ Route::get('/create-book', [BookController::class, 'createBook'])->name('createb
 
 Route::post('/store-book', [BookController::class,'storeBook']);
 
-Route::get('/edit-book/{id}', [BookController::class, 'edit'])->name('edit');
+Route::get('/detail-book/edit/{book}', [BookController::class, 'edit'])->name('editbook');
 
-Route::patch('/update-book/{id}', [BookController::class, 'update'])->name('update');
+Route::patch('/update-book/{book}', [BookController::class, 'update'])->name('update');
 
-Route::delete('/delete-book/{id}', [BookController::class, 'delete'])->name('delete');
+Route::delete('/delete-book/{book}', [BookController::class, 'delete'])->name('deletebook');
 
 Route::get('/create-category', [CategoryController::class, 'createCategory'])->name('createcategory');
 

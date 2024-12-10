@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Format;
 use App\Models\Book;
 use App\Models\Reader;
 use Illuminate\Http\Request;
@@ -11,7 +12,8 @@ class BookController extends Controller
     //
     public function createBook(){
         $categories = Category::all();
-        return view('admin.createbook', compact('categories'));
+        $formats = Format::all();
+        return view('admin.createbook', compact('categories', 'formats'));
     }
 
     public function storeBook (Request $request){
@@ -74,23 +76,24 @@ class BookController extends Controller
     public function edit($id){
         $categories = Category::all();
         $book = Book::findOrFail($id);
-        return view('admin.editbook', compact('book'), compact('categories') );
+        $formats = Format::all();
+        return view('admin.editbook', compact('book', 'categories' , 'formats'));
     }
 
     public function update (Request $request, $id){
                
         $request->validate([
-            'Title'=> 'required',
+            'Title'=> 'required|unique:books,Title,except,id',
             'PubDate'=> 'required',
             'Author'=> 'required|min:5',
             'ISBN'=> 'required|min:13|integer',
             'Publisher'=> 'required|min:5',
-            'PrintWeight'=> 'required|integer|gt:15',
-            'PrintWidth'=> 'required|integer|gt:15',
-            'PrintLength'=> 'required|integer|gt:15',
+            'PrintWeight'=> 'required|min:3',
+            'PrintWidth'=> 'required|min:3',
+            'PrintLength'=> 'required|min:3',
             'Page'=> 'required|integer|gt:15',
-            'Stock'=> 'required|integer|gt:5',
-            'Image'=> 'required|mimes:png,jpg'
+            'Stock'=> 'required|integer|gt:0',
+            'Image'=> 'required|mimes:png,jpg,jpeg'
         ]);
 
         $extension = $request->file('Image')->getClientOriginalExtension();
@@ -112,20 +115,12 @@ class BookController extends Controller
             'Stock'=> $request->Stock,
             'Image'=> $fileName
         ]);
-        return redirect('/');
+        return redirect('/dashboard');
     }
-    
-    // public function updateStock($id){
-    //     Book::findOrFail($id)->update([
-    //         'Stock'=> $stock-1,
-    //     ]);
-    //     return redirect('/collection');
-    // }
-
 
     public function delete($id){
         Book::destroy($id);
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
 

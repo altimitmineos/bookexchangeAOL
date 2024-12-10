@@ -20,6 +20,6 @@ class CategoryController extends Controller
         Category::create([
             'CategoryName' => $request -> CategoryName,
         ]);
-        return redirect('/');
+        return redirect('/dashboard');
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;  
+
 
 /*
 |--------------------------------------------------------------------------
@@ -59,11 +61,17 @@ Route::get('/view-reader', [ReaderController::class, 'viewReader']);
 
 Route::get('/view-book', [ReaderController::class,  'viewBook']);
 
+// Route untuk halaman detail buku  
+Route::get('/detail-book/{book}', [BookController::class, 'showBook'])->name('book.detail');  
+
+// Route untuk pembayaran buku  
+Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('payment');  
+
+// Route untuk menyimpan pembaca  
+Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');  
+
+// Route untuk halaman home  
+Route::get('/', [HomeController::class, 'index'])->name('home');  
+
+// Route untuk koleksi buku (jika diperlukan)  
 Route::get('/collection', [BookController::class, 'show'])->name('custhome');
-
-Route::get('/detail-book/{book}', [BookController::class, 'showBook'])->name('bookdetail');
-
-Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('payment');
-
-Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
-

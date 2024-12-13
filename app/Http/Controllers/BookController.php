@@ -6,6 +6,7 @@ use App\Models\Format;
 use App\Models\Book;
 use App\Models\Reader;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BookController extends Controller
 {
@@ -17,7 +18,7 @@ class BookController extends Controller
     }
 
     public function storeBook (Request $request){
-        
+
         $request->validate([
             'Title'=> 'required|unique:books,Title,except,id',
             'PubDate'=> 'required',
@@ -68,6 +69,31 @@ class BookController extends Controller
         return view('admin.bookdetail', compact('book') );
     }
 
+    public function indexuser(){
+    $currentYear = Carbon::now()->year;
+
+    // Fetch books released in the current year
+    $newReleases = Book::whereYear('PublicationDate', $currentYear)->get();
+
+    // Fetch books not in the current year's release
+    $bestSellers = Book::whereYear('PublicationDate', '<', $currentYear)->get();
+
+    return view('user.homepageuser', compact('newReleases', 'bestSellers'));
+    }
+
+    public function indexguest(){
+        $currentYear = Carbon::now()->year;
+
+        // Fetch books released in the current year
+        $newReleases = Book::whereYear('PublicationDate', $currentYear)->get();
+
+        // Fetch books not in the current year's release
+        $bestSellers = Book::whereYear('PublicationDate', '<', $currentYear)->get();
+
+        return view('guest.homepageguest', compact('newReleases', 'bestSellers'));
+        }
+
+
     public function showPayment($id){
         $book = Book::findOrFail($id);
         return view('admin.payment', compact('book') );
@@ -81,7 +107,7 @@ class BookController extends Controller
     }
 
     public function update (Request $request, $id){
-               
+
         $request->validate([
             'Title'=> 'required|unique:books,Title,except,id',
             'PubDate'=> 'required',
@@ -99,7 +125,7 @@ class BookController extends Controller
         $extension = $request->file('Image')->getClientOriginalExtension();
         $fileName = $request->Title.'_'.$request->Author.'.'.$extension;
         $request->file('Image')->storeAs('/public/image', $fileName);
-        
+
         Book::findOrFail($id)->update([
             'Title'=> $request->Title,
             'PublicationDate'=> $request->PubDate,
@@ -127,7 +153,7 @@ class BookController extends Controller
     //API
     public function getBook(){
         $books = Book::all();
-        return $books; 
+        return $books;
     }
 
     public function addBook (Request $request){
@@ -157,7 +183,7 @@ class BookController extends Controller
         $extension = $request->file('Image')->getClientOriginalExtension();
         $fileName = $request->Title.'_'.$request->Author.'.'.$extension;
         $request->file('Image')->storeAs('/public/image', $fileName);
-        
+
         Book::findOrFail($id)->update([
             'Title'=> $request->Title,
             'PublicationDate'=> $request->PubDate,

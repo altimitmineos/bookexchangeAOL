@@ -60,7 +60,7 @@
                 <a href="{{ route('home') }}" class="mb-3 btn btn-secondary">
                     <i class="fas fa-arrow-left me-2"></i>Back to Home
                 </a>
-                
+
                 <a href="{{ route('editbook', ['book' => $book->id]) }}" class="mb-3 btn btn-primary">Edit</a>
                 <form action="{{ url('delete-book', $book->id ) }}" method="POST">
                     @csrf
@@ -69,7 +69,7 @@
                         Delete
                     </button>
                 </form>
-                
+
             </div>
         </div>
     </div>

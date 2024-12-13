@@ -37,6 +37,44 @@
             margin-right: 20px;
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .section h2 {
+            margin-bottom: 20px;
+        }
+        .books {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .book {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            width: calc(33% - 20px);
+            box-sizing: border-box;
+        }
+        .book img {
+            width: 100%;
+            height: auto;
+        }
+        .book h3 {
+            margin: 10px 0;
+        }
+        .book p {
+            margin: 5px 0;
+        }
+
     </style>
 </head>
 <body>
@@ -67,11 +105,9 @@
             </div>
         </div>
     </nav>
-
     <div class="main-content">
         @yield('content')
     </div>
-
     <footer class="footer">
         <div class="container">
             <div class="row">

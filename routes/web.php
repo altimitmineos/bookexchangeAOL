@@ -67,6 +67,7 @@ Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('
 
 Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
 
-Route::get('/usernavbar', function() { return view('home.user');})->name('user');
+Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home');
 
-Route::get('/guestnavbar', function() { return view('layouts.guest');})->name('guest');
+
+Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home');

@@ -10,6 +10,7 @@
 
         <!-- Books Section -->
         <div class="movies-section">
+            <h2 class="mb-3 text-center">Book List</h2>
             <div class="row">
                 <div class="col">
                     <table class="table">

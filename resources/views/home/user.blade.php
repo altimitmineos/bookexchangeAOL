@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('stylesbookdetail.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Urbanist' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('user.css')}}">
     <style>
         .navbar-brand {
             font-size: 1.8rem;

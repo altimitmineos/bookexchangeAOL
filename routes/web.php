@@ -66,4 +66,3 @@ Route::get('/detail-book/{book}', [BookController::class, 'showBook'])->name('bo
 Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('payment');
 
 Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
-

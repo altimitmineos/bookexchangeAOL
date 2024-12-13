@@ -174,7 +174,7 @@ class BookSeeder extends Seeder
                 'Formats_id' => 1,
                 'Image' => 'images/kpop.jpeg',
                 'Stock' => 8,
-                'Cost' => 'Rp. 20000'
+                'Cost' => 'Rp. 20.000'
             ],
         ];
 

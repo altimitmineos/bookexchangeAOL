@@ -39,7 +39,7 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
     ->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/dashboard', [BookController::class, 'showCollection'])->name('home');
+Route::get('/dashboard-admin', [BookController::class, 'showCollection'])->name('home');
 
 Route::get('/create-book', [BookController::class, 'createBook'])->name('createbook');
 
@@ -67,3 +67,6 @@ Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('
 
 Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
 
+Route::get('/usernavbar', function() { return view('home.user');})->name('user');
+
+Route::get('/guestnavbar', function() { return view('layouts.guest');})->name('guest');

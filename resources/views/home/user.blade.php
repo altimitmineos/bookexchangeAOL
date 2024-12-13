@@ -37,11 +37,6 @@
             margin-right: 20px;
         }
 
-        .nav-item{
-            margin-left:20px;
-            margin-right:20px;
-        }
-
     </style>
 </head>
 <body>
@@ -62,8 +57,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="">Category</a>
                     </li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-primary" type="login">Login</button>
+                    <li class="nav-item-icon">
+                        <a href="" class="text-black"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item-icon">
+                        <a href="" class="text-black"><i class="fa-regular fa-user fa-xl"></i></a>
                     </li>
                 </ul>
             </div>

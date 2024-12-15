@@ -35,14 +35,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- {{$books->links()}} --}}
+                    
                 </div>
+                {{ $books->links() }}
             </div>
         </div>
-
-        {{-- <!-- Pagination -->
-        <div class="mt-4 d-flex justify-content-center">
-            {{$books->links('pagination::bootstrap-4')}}
-        </div> --}}
     </div>
 @endsection

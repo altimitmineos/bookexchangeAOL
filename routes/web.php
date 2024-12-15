@@ -39,7 +39,7 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
     ->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/dashboard-admin', [BookController::class, 'showCollection'])->name('home');
+Route::get('/dashboard-admin', [BookController::class, 'showCollection'])->name('home-admin'); //ini buat homepage ADMIN
 
 Route::get('/create-book', [BookController::class, 'createBook'])->name('createbook');
 
@@ -67,7 +67,10 @@ Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('
 
 Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
 
-Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home');
+Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home'); //SEDANG DIBUAT SEARCH GUEST
 
+Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home'); //SEDANG DIBUAT SEARCH USER
 
-Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home');
+Route::get('/usersearch', [BookController::class, 'userSearch'])->name('usersearch'); //Ga jalan
+
+Route::get('/categoryuser', [BookController::class, 'categorybook'])->name('categoryuser'); //Problem (Ga muncul tampilan booksnya)

@@ -54,15 +54,18 @@ class BookController extends Controller
         return redirect('/');
     }
 
-    public function show(){
-        $books = Book::all(); //ambil semua data yang ada di model book
-        return view('admin.admin', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
-    }
+
 
     public function showCollection(){
-        $books = Book::all(); //ambil semua data yang ada di model book
-        return view('admin.home', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
-    }
+
+        $books = Book::orderBy('Title');
+
+        if(request()->has('search')){
+            $books = $books->where('Title', 'like', '%'.request()->get('search', '').'%');
+        }
+        
+        return view('admin.home', ['books'=>$books->paginate(5)] ); 
+    } //ADMIN - SHOW COLECTION
 
     public function showBook($id){
         $book = Book::findOrFail($id);
@@ -81,6 +84,15 @@ class BookController extends Controller
     return view('user.homepageuser', compact('newReleases', 'bestSellers'));
     }
 
+    public function userSearch(Request $request){
+        $search = $request->search;
+
+        $newReleases = Book::where('Title', 'like', '%'.$search.'%');
+        $bestSellers = Book::where('Title', 'like', '%'.$search.'%');
+
+        return view('user.homepageuser', compact('newReleases', 'bestSellers'));
+    }
+
     public function indexguest(){
         $currentYear = Carbon::now()->year;
 
@@ -91,8 +103,14 @@ class BookController extends Controller
         $bestSellers = Book::whereYear('PublicationDate', '<', $currentYear)->get();
 
         return view('guest.homepageguest', compact('newReleases', 'bestSellers'));
-        }
+    }
 
+    public function categorybook($category_id=0){
+        $books = Book::where('category_id', $category_id)->paginate(3);
+        $categories = category::all();
+
+        return view('user.categorypageuser', compact('books', 'categories'));
+    }
 
     public function showPayment($id){
         $book = Book::findOrFail($id);

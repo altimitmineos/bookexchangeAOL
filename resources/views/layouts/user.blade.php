@@ -86,9 +86,12 @@
 <body>
     <nav class="mb-4 bg-white navbar navbar-expand-lg navbar-white">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                bookexchange.com
-            </a>
+            <div class="d-flex align-items-center">
+                <img alt="Book Exchange Logo" class="w-10 h-10" src="{{ asset('images/BookLogo.jpg') }}" />
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    bookexchange.com
+                </a>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -102,7 +105,7 @@
                         <a class="nav-link" href="{{ route('categoryuser') }}">Category</a>
                     </li>
                     <li class="nav-item-icon">
-                        <a href="" class="text-black"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
+                        <a href="{{ route('cart.show') }}" class="text-black"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
                     </li>
                     <li class="nav-item-icon">
                         <a href="" class="text-black"><i class="fa-regular fa-user fa-xl"></i></a>

@@ -40,8 +40,8 @@ class Book extends Model
     }
 
     public function cartItems()
-{
+    {
     return $this->hasMany(CartItem::class, 'book_id');
-}
+    }
 
 }

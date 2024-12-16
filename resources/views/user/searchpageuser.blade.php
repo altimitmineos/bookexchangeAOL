@@ -12,7 +12,7 @@
         <div class="row">
             @foreach ( $books as $book )
             <div class="col-md-2">
-                <a href="{{ route('bookdetail', $book->id) }}" class="text-decoration-none">
+                <a href="{{ route('bookdetail-user', $book->id) }}" class="text-decoration-none">
                     <div class="card">
                         <img src="{{ asset($book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
                         <div class="card-body">

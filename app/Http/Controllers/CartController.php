@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -49,36 +50,27 @@ class CartController extends Controller
     }
 
     public function update(Request $request, CartItem $item)
-{
-    $item->load('book');
-
-
+    {
+    // Validate the quantity input
     $request->validate([
-        'action' => 'required|string|in:increase,decrease',
+        'quantity' => 'required|integer|min:1',  // Ensure quantity is an integer and >= 1
     ]);
 
-    $currentQuantity = $item->quantity;
-    $availableStock = $item->book->stock;
+    // Get the new quantity from the request
+    $newQuantity = $request->input('quantity');
 
-    if ($request->action === 'increase') {
-        $newQuantity = $currentQuantity + 1;
-    } elseif ($request->action === 'decrease') {
-        $newQuantity = $currentQuantity - 1;
-    }
-
-    if ($newQuantity < 1) {
-        return redirect()->route('cart.show')->with('error', 'Quantity cannot be less than 1.');
-    }
-
+    // Check if the quantity doesn't exceed available stock (optional)
+    $availableStock = $item->book->Stock; // assuming 'book' relationship exists in CartItem model
     if ($newQuantity > $availableStock) {
         return redirect()->route('cart.show')->with('error', 'Not enough stock available.');
     }
 
-    $item->quantity = $newQuantity;
-    $item->save();
+    // Update the cart item quantity
+    $item->update(['quantity' => $newQuantity]);
 
+    // Redirect back with a success message
     return redirect()->route('cart.show')->with('success', 'Cart updated successfully.');
-}
+    }
 
 
     public function remove(CartItem $cartItem)
@@ -88,60 +80,67 @@ class CartController extends Controller
     return redirect()->route('cart.show')->with('success', 'Item removed from cart.');
     }
 
-    public function checkout()
-    {
-        $user = auth()->user(); // Get the authenticated user
-        $cart = Cart::where('user_id', $user->id)->first(); // Fetch the user's cart
-
-        // Check if the cart exists and is not empty
-        if (!$cart || $cart->items->isEmpty()) {
-            return redirect()->route('cart.show')->with('error', 'Your cart is empty!');
-        }
-
-        // Calculate total price for the cart
-        $total = $cart->items->sum(function ($item) {
-            return $item->book->price * $item->quantity;
-        });
-
-        return view('checkout', compact('cart', 'total')); // Show the checkout page
-    }
 
     // Process the checkout: Clear cart and adjust stock quantities
+
+    // app/Http/Controllers/CartController.php
     public function processCheckout(Request $request)
-    {
-        $user = auth()->user(); // Get the authenticated user
-        $cart = Cart::where('user_id', $user->id)->first(); // Fetch the user's cart
-
-        // If the cart is empty, redirect
-        if (!$cart || $cart->items->isEmpty()) {
-            return redirect()->route('cart.show')->with('error', 'Your cart is empty!');
-        }
-
-        // Loop through cart items and update stock for each book
-        foreach ($cart->items as $cartItem) {
-            $book = $cartItem->book; // Get the associated book
-
-            // Ensure there is a valid quantity and stock before updating
-            if ($cartItem->quantity && $cartItem->quantity > 0) {
-                // Check if there is enough stock
-                if ($book->stock >= $cartItem->quantity) {
-                    // Subtract the quantity from the book stock
-                    $book->stock -= $cartItem->quantity;
-                    $book->save();
-                } else {
-                    // If not enough stock, return an error
-                    return redirect()->route('cart.show')->with('error', 'Not enough stock for "' . $book->title . '"!');
-                }
-            } else {
-                // If quantity is invalid or null, return an error
-                return redirect()->route('cart.show')->with('error', 'Invalid quantity for item "' . $book->title . '"!');
-            }
-        }
-
-        // Clear the cart after checkout
-        $cart->items()->delete();
-
-        // Redirect with success message
-        return redirect()->route('cart.show')->with('success', 'Your order has been placed and your cart is cleared!');
+{
+    // Get authenticated user
+    $user = auth()->user();
+    if (!$user) {
+        return redirect()->route('cart.show')->with('error', 'You need to log in.');
     }
+
+    // Get user's cart
+    $cart = Cart::where('user_id', $user->id)->first();
+
+    if (!$cart || $cart->cartItems->isEmpty()) {
+        return redirect()->route('cart.show')->with('error', 'Your cart is empty.');
+    }
+
+    // Validate cart items and stock
+    $cartItems = $cart->cartItems; // Retrieve cart items
+
+    foreach ($cartItems as $cartItem) {
+        $book = $cartItem->book;
+
+        if (!$book) {
+            return redirect()->route('cart.show')->with('error', 'A book in your cart is missing.');
+        }
+
+        $quantityPurchased = $cartItem->quantity;
+        $stock = $book->Stock;
+
+        // Debugging
+        if (is_null($stock)) {
+            dd([
+                'cartItem' => $cartItem,
+                'book' => $book,
+                'stock' => $stock,
+                'quantity_purchased' => $quantityPurchased,
+            ]);
+        }
+
+        // Check stock availability
+        if ($quantityPurchased > $stock) {
+            return redirect()->route('cart.show')->with('error', "Not enough stock for {$book->title}.");
+        }
+    }
+
+    // Deduct stock and clear cart
+    foreach ($cartItems as $cartItem) {
+        $book = $cartItem->book;
+        $quantityPurchased = $cartItem->quantity;
+
+        // Deduct stock
+        $book->update(['Stock' => $book->Stock - $quantityPurchased]);
+    }
+
+    // Clear cart items
+    $cart->cartItems()->delete();
+
+    return redirect()->route('cart.show')->with('success', 'Checkout successful!');
+}
+
 }

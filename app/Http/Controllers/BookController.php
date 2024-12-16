@@ -80,6 +80,10 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         return view('user.bookdetailUser', compact('book') );
     }
+    public function showBookGuest($id){
+        $book = Book::findOrFail($id);
+        return view('guest.bookdetailGuest', compact('book') );
+    }
 
     public function indexuser(){
     $currentYear = Carbon::now()->year;

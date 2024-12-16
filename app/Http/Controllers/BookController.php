@@ -84,14 +84,17 @@ class BookController extends Controller
     return view('user.homepageuser', compact('newReleases', 'bestSellers'));
     }
 
-    public function userSearch(Request $request){
-        $search = $request->search;
+    public function userSearch(){
 
-        $newReleases = Book::where('Title', 'like', '%'.$search.'%');
-        $bestSellers = Book::where('Title', 'like', '%'.$search.'%');
+        $books = Book::orderBy('Title');
 
-        return view('user.homepageuser', compact('newReleases', 'bestSellers'));
-    }
+        if(request()->has('search')){
+            $books = Book::where('Title', 'LIKE', '%'.request()->get('search', '').'%');
+        }
+        
+        return view('user.searchpageuser', ['books'=>$books->paginate(5)]); 
+    } 
+
 
     public function indexguest(){
         $currentYear = Carbon::now()->year;
@@ -104,6 +107,17 @@ class BookController extends Controller
 
         return view('guest.homepageguest', compact('newReleases', 'bestSellers'));
     }
+
+    public function guestSearch(){
+
+        $books = Book::orderBy('Title');
+
+        if(request()->has('search')){
+            $books = Book::where('Title', 'LIKE', '%'.request()->get('search', '').'%');
+        }
+        
+        return view('guest.searchpageguest', ['books'=>$books->paginate(5)]); 
+    } 
 
     public function categorybook($category_id=0){
         $books = Book::where('category_id', $category_id)->paginate(3);

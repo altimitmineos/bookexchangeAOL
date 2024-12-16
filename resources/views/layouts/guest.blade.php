@@ -55,8 +55,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" action="{{ route('guestsearch') }}" method="GET">
+                        <input class="text me-2" name="search" placeholder="search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                       </form>
                     <li class="nav-item">

@@ -69,8 +69,10 @@ Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->nam
 
 Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home'); //SEDANG DIBUAT SEARCH GUEST
 
+Route::get('/guestsearch', [BookController::class, 'guestSearch'])->name('guestsearch');
+
 Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home'); //SEDANG DIBUAT SEARCH USER
 
-Route::get('/usersearch', [BookController::class, 'userSearch'])->name('usersearch'); //Ga jalan
+Route::get('/usersearch', [BookController::class, 'userSearch'])->name('usersearch'); //JALAN
 
 Route::get('/categoryuser', [BookController::class, 'categorybook'])->name('categoryuser'); //Problem (Ga muncul tampilan booksnya)

@@ -56,7 +56,7 @@
 
                             <div class="mb-4">
                                 <label for="exampleInputPassword1" class="form-label">Publication Date</label>
-                                <input type="date" value="{{old('PubDate')}}" class="form-control @error('PublicationDate') is-invalid @enderror" id="exampleInputPassword1" name="PubDate">
+                                <input type="date" value="{{old('PublicationDate')}}" class="form-control @error('PublicationDate') is-invalid @enderror" id="exampleInputPassword1" name="PublicationDate">
                                 @error('publish_date')
                                 <div class="alert alert-danger" role="alert">{{$message}}</div>
                                 @enderror
@@ -75,14 +75,6 @@
                                 <input type="text" value="{{old('ISBN')}}" class="form-control @error('ISBN') is-invalid @enderror" id="exampleInputPassword1" name="ISBN">
                                 @error('ISBN')
                                 <div class="alert alert-danger"role="alert">{{$message}}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="exampleInputPassword1" class="form-label">Publisher</label>
-                                <input type="text" value="{{old('Publisher')}}" class="form-control @error('Publisher') is-invalid @enderror" id="exampleInputPassword1" name="Publisher">
-                                @error('Publisher')
-                                <div class="alert alert-danger" role="alert">{{$message}}</div>
                                 @enderror
                             </div>
 
@@ -128,7 +120,7 @@
 
                             <div class="mb-4">
                                 <label for="exampleInputPassword1" class="form-label">Cost</label>
-                                <input type="text" value="{{old('Cost')}}" class="form-control @error('Cost') is-invalid @enderror" id="exampleInputPassword1" name="Cost">
+                                <input type="decimal" value="{{old('Cost')}}" class="form-control @error('Cost') is-invalid @enderror" id="exampleInputPassword1" name="Cost">
                                 @error('Cost')
                                 <div class="alert alert-danger" role="alert">{{$message}}</div>
                                 @enderror

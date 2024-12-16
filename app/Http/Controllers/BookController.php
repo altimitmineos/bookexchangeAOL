@@ -20,25 +20,27 @@ class BookController extends Controller
     public function storeBook (Request $request){
 
         $request->validate([
-            'Title'=> 'required|unique:books,Title,except,id',
-            'PubDate'=> 'required',
+            'Title'=> 'required|unique:books,Title',
+            'PublicationDate'=> 'required|date',
             'Author'=> 'required|min:5',
-            'ISBN'=> 'required|min:13|integer',
+            'ISBN'=> 'required|digits:13|integer',
             'Publisher'=> 'required|min:5',
             'PrintWeight'=> 'required|integer|gt:15',
             'PrintWidth'=> 'required|integer|gt:15',
             'PrintLength'=> 'required|integer|gt:15',
             'Page'=> 'required|integer|gt:15',
+            'Cost'=> 'required|numeric|gt:15',
             'Stock'=> 'required|integer|gt:0',
             'Image'=> 'required|mimes:png,jpg,jpeg'
         ]);
-
+    
         $extension = $request->file('Image')->getClientOriginalExtension();
         $fileName = $request->Title.'_'.$request->Author.'.'.$extension;
-        $request->file('Image')->storeAs('/public/image', $fileName);
+        $request->file('Image')->storeAs('public/image', $fileName);
+    
         Book::create([
             'Title'=> $request->Title,
-            'PublicationDate'=> $request->PubDate,
+            'PublicationDate'=> $request->PublicationDate,
             'Author'=> $request->Author,
             'ISBN'=> $request->ISBN,
             'Publisher'=> $request->Publisher,
@@ -46,23 +48,28 @@ class BookController extends Controller
             'PrintWidth'=> $request->PrintWidth,
             'PrintLength'=> $request->PrintLength,
             'Page'=> $request->Page,
-            'Category_Id'=> $request->CategoryName,
-            'Format_Id'=> $request->FormatName,
+            'Category_Id'=> $request->Category_Id,
+            'Format_Id'=> $request->Format_Id,
+            'Cost'=> $request->Cost,
             'Stock'=> $request->Stock,
             'Image'=> $fileName
         ]);
-        return redirect('/');
+    
+        return redirect()->route('dashboard-admin');
     }
 
-    public function show(){
-        $books = Book::all(); //ambil semua data yang ada di model book
-        return view('admin.admin', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
-    }
+
 
     public function showCollection(){
-        $books = Book::all(); //ambil semua data yang ada di model book
-        return view('admin.home', compact('books') ); //kita mau tampilin data books ini di page Admin, kemudian data yang disimpen di books di passing ke page Admin
-    }
+
+        $books = Book::orderBy('Title');
+
+        if(request()->has('search')){
+            $books = $books->where('Title', 'like', '%'.request()->get('search', '').'%');
+        }
+        
+        return view('admin.home', ['books'=>$books->paginate(5)] ); 
+    } //ADMIN - SHOW COLECTION
 
     public function showBook($id){
         $book = Book::findOrFail($id);
@@ -90,6 +97,18 @@ class BookController extends Controller
     return view('user.homepageuser', compact('newReleases', 'bestSellers'));
     }
 
+    public function userSearch(){
+
+        $books = Book::orderBy('Title');
+
+        if(request()->has('search')){
+            $books = Book::where('Title', 'LIKE', '%'.request()->get('search', '').'%');
+        }
+        
+        return view('user.searchpageuser', ['books'=>$books->paginate(5)]); 
+    } 
+
+
     public function indexguest(){
         $currentYear = Carbon::now()->year;
 
@@ -100,8 +119,52 @@ class BookController extends Controller
         $bestSellers = Book::whereYear('PublicationDate', '<', $currentYear)->get();
 
         return view('guest.homepageguest', compact('newReleases', 'bestSellers'));
-        }
+    }
 
+    public function guestSearch(){
+
+        $books = Book::orderBy('Title');
+
+        if(request()->has('search')){
+            $books = Book::where('Title', 'LIKE', '%'.request()->get('search', '').'%');
+        }
+        
+        return view('guest.searchpageguest', ['books'=>$books->paginate(5)]); 
+    } 
+
+    public function userCategory($category_id=0){
+
+        $books = Book::orderBy('Title');
+
+        if($category_id >= 1){
+            $books = Book::where('Category_Id', $category_id);
+        }   
+        $categories = category::all();
+
+        $datas=[
+            'books'=>$books->paginate(5),
+            'categories'=>$categories
+        ];
+
+        return view('user.categorypageuser', $datas);
+    }
+
+    public function guestCategory($category_id=0){
+
+        $books = Book::orderBy('Title');
+
+        if($category_id >= 1){
+            $books = Book::where('Category_Id', $category_id);
+        }   
+        $categories = category::all();
+
+        $datas=[
+            'books'=>$books->paginate(5),
+            'categories'=>$categories
+        ];
+
+        return view('guest.categorypageguest', $datas);
+    }
 
     public function showPayment($id){
         $book = Book::findOrFail($id);

@@ -41,11 +41,10 @@ Route::get('/register', [RegisteredUserController::class, 'create'])
     ->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/dashboard-admin', [BookController::class, 'showCollection'])->name('home');
+Route::get('/dashboard-admin', [BookController::class, 'showCollection'])->name('home-admin'); //ini buat homepage ADMIN
 
 Route::get('/create-book', [BookController::class, 'createBook'])->name('createbook');
-
-Route::post('/store-book', [BookController::class,'storeBook']);
+Route::post('/store-book', [BookController::class, 'storeBook']);
 
 Route::get('/detail-book/edit/{book}', [BookController::class, 'edit'])->name('editbook');
 
@@ -74,6 +73,15 @@ Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->nam
 Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home.guest');
 
 
+Route::get('/guestsearch', [BookController::class, 'guestSearch'])->name('guestsearch'); //JALAN
+
+Route::get('/categoryguest/{Category_Id?}', [BookController::class, 'guestCategory'])->name('categoryguest'); //JALAN
+
+Route::get('cart-test' , function(){
+    return view('user/cartV2');
+}) -> name('cart');
+
+
 
     Route::middleware('auth')->group(function () {
         // Show the cart
@@ -93,3 +101,7 @@ Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home.gu
     });
 
 Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home');
+
+Route::get('/usersearch', [BookController::class, 'userSearch'])->name('usersearch'); //JALAN
+
+Route::get('/categoryuser/{Category_Id?}', [BookController::class, 'userCategory'])->name('categoryuser'); //JALAN

@@ -25,7 +25,7 @@
             <div class="col-md-2">
                 <a href="{{ route('bookdetail-guest', $book->id) }}" class="text-decoration-none">
                     <div class="card">
-                        <img src="{{ asset($book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
+                        <img src="{{ asset('images/' . $book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $book->Title }}</h5>
                             <p class="card-text">{{ $book->Author }}</p>

@@ -84,37 +84,63 @@ class CartController extends Controller
     // Process the checkout: Clear cart and adjust stock quantities
 
     // app/Http/Controllers/CartController.php
-
     public function processCheckout(Request $request)
-    {
-
-
+{
+    // Get authenticated user
     $user = auth()->user();
-    $cart = $user->cart;  // Ensure the user has a cart
+    if (!$user) {
+        return redirect()->route('cart.show')->with('error', 'You need to log in.');
+    }
+
+    // Get user's cart
+    $cart = Cart::where('user_id', $user->id)->first();
 
     if (!$cart || $cart->cartItems->isEmpty()) {
         return redirect()->route('cart.show')->with('error', 'Your cart is empty.');
     }
 
-    // Loop through cart items and process each
-    foreach ($cart->cartItems as $cartItem) {
+    // Validate cart items and stock
+    $cartItems = $cart->cartItems; // Retrieve cart items
+
+    foreach ($cartItems as $cartItem) {
+        $book = $cartItem->book;
+
+        if (!$book) {
+            return redirect()->route('cart.show')->with('error', 'A book in your cart is missing.');
+        }
+
+        $quantityPurchased = $cartItem->quantity;
+        $stock = $book->Stock;
+
+        // Debugging
+        if (is_null($stock)) {
+            dd([
+                'cartItem' => $cartItem,
+                'book' => $book,
+                'stock' => $stock,
+                'quantity_purchased' => $quantityPurchased,
+            ]);
+        }
+
+        // Check stock availability
+        if ($quantityPurchased > $stock) {
+            return redirect()->route('cart.show')->with('error', "Not enough stock for {$book->title}.");
+        }
+    }
+
+    // Deduct stock and clear cart
+    foreach ($cartItems as $cartItem) {
         $book = $cartItem->book;
         $quantityPurchased = $cartItem->quantity;
 
-        if ($book->quantity < $quantityPurchased) {
-            return redirect()->route('cart.show')->with('error', 'Not enough stock for some items.');
-        }
-
-        // Deduct stock for each item
-        $book->update(['quantity' => $book->quantity - $quantityPurchased]);
+        // Deduct stock
+        $book->update(['Stock' => $book->Stock - $quantityPurchased]);
     }
 
-    // Clear cart items after successful checkout
+    // Clear cart items
     $cart->cartItems()->delete();
 
-    // Redirect to the cart page with a success message
-    return redirect()->route('cart.show')->with('success', 'Checkout successful! Thank you for your purchase.');
-    }
-
+    return redirect()->route('cart.show')->with('success', 'Checkout successful!');
 }
 
+}

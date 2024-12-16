@@ -47,7 +47,7 @@
 <body>
     <nav class="mb-4 bg-white navbar navbar-expand-lg navbar-white">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
+            <a class="navbar-brand" href="{{ route('home.guest') }}">
                 bookexchange.com
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -63,7 +63,7 @@
                         <a class="nav-link" href="">Category</a>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-outline-primary" type="login">Login</button>
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary">Login</a>
                     </li>
                 </ul>
             </div>

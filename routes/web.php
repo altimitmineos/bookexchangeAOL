@@ -23,8 +23,8 @@ use App\Http\Controllers\CheckoutController;
 */
 // Rute Dashboard, Profile, Login, dan Register
 Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return redirect()->route('home.guest');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -65,16 +65,14 @@ Route::get('/collection', [BookController::class, 'show'])->name('custhome');
 
 Route::get('/detail-book/{book}', [BookController::class, 'showBook'])->name('bookdetail');
 Route::get('/book-detail/{book}', [BookController::class, 'showBookUser'])->name('bookdetail-user');
+Route::get('/book-details/{book}', [BookController::class, 'showBookGuest'])->name('bookdetail-guest');
 
 Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('payment');
 
 Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
 
-Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home');
+Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home.guest');
 
-Route::get('cart-test' , function(){
-    return view('user/cartV2');
-}) -> name('cart');
 
 
     Route::middleware('auth')->group(function () {

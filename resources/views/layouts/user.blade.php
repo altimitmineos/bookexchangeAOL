@@ -96,7 +96,7 @@
                         <a class="nav-link" href="">Category</a>
                     </li>
                     <li class="nav-item-icon">
-                        <a href="" class="text-black"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
+                        <a href="{{ route('cart.show') }}" class="text-black"><i class="fa-solid fa-cart-shopping fa-lg"></i></a>
                     </li>
                     <li class="nav-item-icon">
                         <a href="" class="text-black"><i class="fa-regular fa-user fa-xl"></i></a>

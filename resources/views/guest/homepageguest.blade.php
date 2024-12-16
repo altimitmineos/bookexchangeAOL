@@ -6,7 +6,7 @@
         <div class="row">
             @foreach($newReleases as $book)
                 <div class="col-md-2">
-                    <a href="{{ route('bookdetail', $book->id) }}" class="text-decoration-none">
+                    <a href="{{ route('bookdetail-guest', $book->id) }}" class="text-decoration-none">
                     <div class="card">
                         <img src="{{ asset($book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
                         <div class="card-body">
@@ -28,7 +28,7 @@
         <div class="row">
             @foreach($bestSellers as $book)
                 <div class="col-md-2">
-                    <a href="{{ route('bookdetail', $book->id) }}" class="text-decoration-none">
+                    <a href="{{ route('bookdetail-guest', $book->id) }}" class="text-decoration-none">
                     <div class="card">
                         <img src="{{ asset($book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
                         <div class="card-body">

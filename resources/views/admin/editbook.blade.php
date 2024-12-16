@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         {{-- Error --}}
-                        <form action="{{ url('update-book', $book->id) }}" method="post" enctype="multipart/form-data"> 
+                        <form action="{{ url('update-book', $book->id) }}" method="POST" enctype="multipart/form-data">
                             {{-- Error --}}
                             @method('PATCH')
                             @csrf
@@ -29,7 +29,7 @@
                             <div class="mb-4">
                                 <label for="Format" class="form-label">Format</label>
                                 <select class="form-select" aria-label="Default select example" name="FormatName">
-                                    <option value="0">--Select Format--</option>
+                                    <option value="0">Choose Format</option>
                                   @foreach ($formats as $format)
                                     <option value="{{$format->id}}">{{$format->FormatName}}</option>
                                   @endforeach
@@ -49,8 +49,8 @@
 
                             <div class="mb-4">
                                 <label for="Title" class="form-label">Book Title</label>
-                                <input type="text" class="form-control @error('Title') is-invalid @enderror"  
-                                    id="Title" name="Title" value="{{$book->Title}}" 
+                                <input type="text" class="form-control @error('Title') is-invalid @enderror"
+                                    id="Title" name="Title" value="{{$book->Title}}"
                                     placeholder="Enter movie title">
                                 @error('title')
                                 <div class="alert alert-danger" role="alert">{{$message}}</div>
@@ -58,8 +58,8 @@
                             </div>
 
                             <div class="mb-4">
-                                <label for="exampleInputPassword1" class="form-label">Publication Date</label>
-                                <input type="date" value="{{$book->PubDate}}"  class="form-control @error('PublicationDate') is-invalid @enderror" id="exampleInputPassword1" name="PubDate">
+                                <label for="exampleInputPassword1" class="form-label">Input Date</label>
+                                <input type="date" value="{{$book->PublicationDate}}"   class="form-control @error('PublicationDate') is-invalid @enderror" id="exampleInputPassword1" name="PubDate">
                                 @error('publish_date')
                                 <div class="alert alert-danger" role="alert">{{$message}}</div>
                                 @enderror

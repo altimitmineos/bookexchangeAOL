@@ -69,6 +69,11 @@ class BookController extends Controller
         return view('admin.bookdetail', compact('book') );
     }
 
+    public function showBookUser($id){
+        $book = Book::findOrFail($id);
+        return view('user.bookdetailUser', compact('book') );
+    }
+
     public function indexuser(){
     $currentYear = Carbon::now()->year;
 

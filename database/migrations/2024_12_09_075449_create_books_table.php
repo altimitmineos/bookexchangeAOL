@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('Title');
             $table->date('PublicationDate');
-            $table->string('Cost');
+            $table->decimal('Cost', 8, 2);
             $table->string('Author');
             $table->string('ISBN');
             $table->string('Publisher');

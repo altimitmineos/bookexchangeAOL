@@ -38,4 +38,10 @@ class Book extends Model
     public function readers(){
         return $this->belongsToMany(Reader::class);
     }
+
+    public function cartItems()
+{
+    return $this->hasMany(CartItem::class, 'book_id');
+}
+
 }

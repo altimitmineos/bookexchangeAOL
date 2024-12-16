@@ -7,7 +7,7 @@
         <div class="book-info">
             <p class ="author">{{ $book -> Author }}</p>
             <h1 class ="Title">{{ $book->Title }}</h1>
-            <h2>{{ $book -> Cost }}</h2>
+            <h2>Rp{{ number_format($book->Cost, 0, ',', '.') }}</h2>
             <p><strong>{{ $book->category->CategoryName }}</strong></p>
             {{-- <p><strong>Format Buku:</strong> {{ $book->format->FormatName }}</p --}}
             <p class = "formatbuks">Format Buku</p>

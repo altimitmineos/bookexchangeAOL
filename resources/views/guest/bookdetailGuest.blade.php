@@ -2,7 +2,7 @@
 @section('content')
 <div class="book-detail">
     <div class="book-image">
-        <img src="{{ asset($book->Image) }}" alt="{{ $book->Title }}">
+        <img src="{{ asset('images/' . $book->Image) }}" alt="{{ $book->Title }}">
     </div>
     <div class="book-info">
         <p class ="author">{{ $book -> Author }}</p>
@@ -44,11 +44,11 @@
             <div class="right">
                 <div class="yuhu">
                     <p><strong>Berat:</strong></p>
-                        {{ $book->PrintWeight }}
+                        {{ $book->PrintWeight }} kg
                 </div>
                 <div class="yuhu">
                     <p><strong>Dimensi:</strong></p>
-                        {{ $book->printWidth }} x {{ $book->printLength }}
+                        {{ $book->printWidth }} cm x {{ $book->printLength }} cm
                 </div>
                 <div class="yuhu">
                     <p><strong>Stock:</strong></p>

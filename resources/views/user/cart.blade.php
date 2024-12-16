@@ -23,15 +23,13 @@
                     </div>
                 </div>
                 <div class="quantity-controls">
-                    <form method="POST" action="{{ route('cart.update', $item) }}" class="quantity-form">
+                    <form method="POST" action="{{ route('cart.update', $item->id) }}" class="quantity-form">
                         @csrf
-                        @method('PATCH')
-                        <!-- Decrease Button -->
-                        <button type="submit" name="action" value="decrease" class="btn-decrease">-</button>
-                        <!-- Current Quantity -->
-                        <span class="quantity">{{ $item->quantity }}</span>
-                        <!-- Increase Button -->
-                        <button type="submit" name="action" value="increase" class="btn-increase">+</button>
+                        @method('POST')
+                        <div class="cart-item">
+                            <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" class="qtyInput">
+                            <button type="submit" name="action" class="button">Update</button>
+                        </div>
                     </form>
                 </div>
                 <div class="remove-item">
@@ -52,9 +50,9 @@
         <div class="order-summary">
             <h2>Order Summary</h2>
             <p><strong>Total: Rp{{ number_format($cart->total_price, 0, ',', '.') }}</strong></p>
-            <form method="POST" action="{{ route('cart.processCheckout') }}">
+            <form action="{{ route('cart.checkout') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn-checkout">Check Out</button>
+                <button type="submit">Checkout</button>
             </form>
         </div>
     </div>

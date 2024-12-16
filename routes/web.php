@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,13 +77,21 @@ Route::get('cart-test' , function(){
 }) -> name('cart');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
-    Route::post('cart/{book}', [CartController::class, 'add'])->name('cart.add');
-    Route::patch('/cart/{item}', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('cart-items/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
-    Route::get('cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('cart.processCheckout');
-});
+    Route::middleware('auth')->group(function () {
+        // Show the cart
+        Route::get('cart', [CartController::class, 'show'])->name('cart.show');
+
+        // Add item to cart
+        Route::post('cart/{book}/add', [CartController::class, 'add'])->name('cart.add');
+
+        // Update cart item
+        Route::post('cart/{item}/update', [CartController::class, 'update'])->name('cart.update');
+
+        // Remove cart item
+        Route::delete('cart/{cartItem}/remove', [CartController::class, 'remove'])->name('cart.remove');
+
+        // Process checkout
+        Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('cart.checkout');
+    });
 
 Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home');

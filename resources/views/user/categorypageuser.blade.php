@@ -8,7 +8,6 @@
         </div>
     @endif
 
-    {{-- Category Label --}}
     <div class="button-container">
         <a href="{{ route('categoryuser') }}" class="btn btn-outline-dark btn-lg">All</a>
         @foreach ($categories as $category)
@@ -16,24 +15,27 @@
         @endforeach
     </div>
 
+
     {{-- Book List --}}
-    <div class="row">
-        @foreach($books as $book)
+    <div class="movies-section">
+        <div class="row">
+            @foreach ( $books as $book )
             <div class="col-md-2">
                 <a href="{{ route('bookdetail', $book->id) }}" class="text-decoration-none">
-                <div class="card">
-                    <img src="{{ asset($book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $book->Title }}</h5>
-                        <p class="card-text">{{ $book->Author }}</p>
-                        <p class="card-text">{{ $book->Cost }}</p>
+                    <div class="card">
+                        <img src="{{ asset($book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $book->Title }}</h5>
+                            <p class="card-text">{{ $book->Author }}</p>
+                            <p class="card-text">Rp{{ number_format($book->Cost, 0, ',', '.') }}</p>
+                        </div>
                     </div>
-                </div>
                 </a>
             </div>
-        @endforeach
+            @endforeach
+            {{ $books->links() }}
+        </div>
     </div>
-    {{$books->links()}}
 </div>
 
 @endsection

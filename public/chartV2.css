@@ -1,0 +1,134 @@
+body {
+    background-color: #f0f4f8;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #ffffff;
+    padding: 1rem;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar .form-control {
+    width: 300px;
+}
+
+.navbar .btn {
+    background-color: #f0f4f8;
+    border: none;
+}
+
+.navbar .btn:hover {
+    background-color: #e0e4e8;
+}
+
+.navbar .btn:focus {
+    box-shadow: none;
+}
+
+.navbar .btn img {
+    border-radius: 50%;
+}
+
+/* New user icon and greeting styling */
+.navbar .nav-item.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .nav-item.d-flex span {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Adding space between the profile icon and greeting */
+.navbar .nav-item.d-flex .fa-user {
+    margin-left: 10px;
+}
+
+.content {
+    padding: 2rem;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #ffffff;
+    border-bottom: none;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.card-body {
+    background-color: #ffffff;
+}
+
+.order-summary {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.order-summary .btn {
+    background-color: #3a3a3a;
+    color: #ffffff;
+    width: 100%;
+}
+
+.order-summary .btn:hover {
+    background-color: #2a2a2a;
+}
+
+.order-summary .btn-light {
+    background-color: #f0f4f8;
+    border: none;
+}
+
+.order-summary .btn-light:hover {
+    background-color: #e0e4e8;
+}
+
+.order-summary .input-group {
+    width: 100%;
+}
+
+.order-summary .input-group input {
+    text-align: center;
+}
+
+.price {
+    position: relative;
+    top: -5px; /* Move the price 5px up */
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .navbar .form-control {
+        width: 200px;
+    }
+    .content {
+        padding: 1rem;
+    }
+}
+
+.custom-btn-height {
+    height: 45px; /* Adjust to the desired height */
+    display: flex;
+    align-items: center; /* Center the content vertically */
+    justify-content: center; /* Center the content horizontally */
+}
+
+.nav-item-icon{
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

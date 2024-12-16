@@ -29,7 +29,7 @@
                                     </td>
                                     <td>{{$book->Title}}</td>
                                     <td>{{$book->category->CategoryName}}</td>
-                                    <td>{{$book->Cost }}</td>
+                                    <td>Rp{{ number_format($book->Cost, 0, ',', '.') }}</td>
                                     <td><a class="btn btn-outline-dark" href="{{ route('bookdetail', ['book'=>$book->id]) }}">detail</a></td>
                                 </tr>
                             @endforeach

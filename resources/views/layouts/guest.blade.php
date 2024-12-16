@@ -60,7 +60,7 @@
                         <button class="btn btn-outline-success" type="submit">Search</button>
                       </form>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Category</a>
+                        <a class="nav-link" href="{{ route('categoryguest') }}">Category</a>
                     </li>
                     <li class="nav-item">
                         <button class="btn btn-outline-primary" type="login">Login</button>

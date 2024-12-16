@@ -86,9 +86,12 @@
 <body>
     <nav class="mb-4 bg-white navbar navbar-expand-lg navbar-white">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                bookexchange.com
-            </a>
+            <div class="d-flex align-items-center">
+                <img alt="Book Exchange Logo" class="w-10 h-10" src="{{ asset('images/BookLogo.jpg') }}" />
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    bookexchange.com
+                </a>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>

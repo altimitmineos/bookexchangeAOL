@@ -54,32 +54,17 @@ Route::delete('/delete-book/{book}', [BookController::class, 'delete'])->name('d
 
 Route::get('/create-category', [CategoryController::class, 'createCategory'])->name('createcategory');
 
-Route::post('/store-category', [CategoryController::class, 'storeCategory']);
-
-Route::get('/view-reader', [ReaderController::class, 'viewReader']);
-
-Route::get('/view-book', [ReaderController::class,  'viewBook']);
-
 Route::get('/collection', [BookController::class, 'show'])->name('custhome');
 
 Route::get('/detail-book/{book}', [BookController::class, 'showBook'])->name('bookdetail');
 Route::get('/book-detail/{book}', [BookController::class, 'showBookUser'])->name('bookdetail-user');
 Route::get('/book-details/{book}', [BookController::class, 'showBookGuest'])->name('bookdetail-guest');
 
-Route::get('/book-payment/{id}', [BookController::class, 'showPayment'])->name('payment');
-
-Route::post('/store-reader/{id}', [ReaderController::class, 'storeReader'])->name('addreader');
-
 Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home.guest');
-
 
 Route::get('/guestsearch', [BookController::class, 'guestSearch'])->name('guestsearch'); //JALAN
 
 Route::get('/categoryguest/{Category_Id?}', [BookController::class, 'guestCategory'])->name('categoryguest'); //JALAN
-
-Route::get('cart-test' , function(){
-    return view('user/cartV2');
-}) -> name('cart');
 
 
 

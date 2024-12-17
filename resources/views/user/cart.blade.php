@@ -159,7 +159,7 @@
             @foreach ($cart->cartItems as $item)
             <div class="child-cart-item">
                 <div class="child-book-info">
-                    <img src="{{ $item->book->Image ?? 'default-image.jpg' }}" alt="{{ $item->book->Title }}" class="child-book-image">
+                    <img src="{{ asset('images/' . $item->book->Image) ?? asset('default-image.jpg') }}" alt="{{ $item->book->Title }}" class="child-book-image">
                     <div class="child-details">
                         <p class="child-book-title">{{ $item->book->Title }}</p>
                         <p class="child-book-price">Rp{{ number_format($item->book->Cost, 0, ',', '.') }}</p>

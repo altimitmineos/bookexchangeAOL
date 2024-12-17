@@ -25,9 +25,9 @@ class BookController extends Controller
                 'Author' => 'required|min:5',
                 'ISBN' => 'required|digits:13|integer',
                 'Publisher' => 'required|min:5',
-                'PrintWeight' => 'required|numeric|gt:2',
-                'PrintWidth' => 'required|numeric|gt:2',
-                'PrintLength' => 'required|numeric|gt:2',
+                'PrintWeight' => 'required|numeric|gt:0.01',
+                'PrintWidth' => 'required|numeric|gt:0.01',
+                'PrintLength' => 'required|numeric|gt:0.01',
                 'Page' => 'required|integer|gt:15',
                 'Cost' => 'required|numeric|gt:15',
                 'Stock' => 'required|integer|gt:0',
@@ -56,8 +56,68 @@ class BookController extends Controller
                 'Image' => $imageName
             ]);
 
-            return redirect()->route('home-admin');
+            return redirect()->
+            
+            route('home-admin');
         }
+
+        public function update(Request $request, $id)
+{
+    // Find the book by ID
+    $book = Book::findOrFail($id);
+
+    // Validate the request
+    $request->validate([
+        'Title' => 'required|unique:books,Title,' . $book->id,
+        'PublicationDate' => 'required|date',
+        'Author' => 'required|min:5',
+        'ISBN' => 'required|digits:13|integer',
+        'Publisher' => 'required|min:5',
+        'PrintWeight' => 'required|numeric|gt:0.01',
+        'printWidth' => 'required|numeric|gt:0.01',
+        'printLength' => 'required|numeric|gt:0.01',
+        'Page' => 'required|integer|gt:15',
+        'Cost' => 'required|numeric|gt:15',
+        'Stock' => 'required|integer|gt:0',
+        // Image is optional; if provided, must be of valid type
+        'Image' => 'nullable|mimes:png,jpg,jpeg',
+        'Category_Id' => 'required|exists:categories,id',
+        'Format_Id' => 'required|exists:formats,id', // Ensure Format_Id exists in formats table
+    ]);
+
+    // Update image if provided
+    if ($request->hasFile('Image')) {
+        // Delete old image if it exists
+        if ($book->Image && file_exists(public_path('images/' . $book->Image))) {
+            unlink(public_path('images/' . $book->Image));
+        }
+
+        // Store new image
+        $imageName = time() . '.' . $request->Image->extension();
+        $request->Image->move(public_path('images'), $imageName);
+    } else {
+        // Keep the old image name if no new image is uploaded
+        $imageName = $book->Image;
+    }
+    // Update book details
+    $book->update([
+        'Title' => $request->Title,
+        'PublicationDate' => $request->PublicationDate,
+        'Author' => $request->Author,
+        'ISBN' => $request->ISBN,
+        'Publisher' => $request->Publisher,
+        'PrintWeight' => $request->PrintWeight,
+        'printWidth' => $request->printWidth,
+        'printLength' => $request->printLength,
+        'Page' => $request->Page,
+        'Category_Id' => $request->Category_Id,
+        'Format_Id' => $request->Format_Id, // Update Format_Id here
+        'Cost' => $request->Cost,
+        'Stock' => $request->Stock,
+        'Image' => $imageName
+    ]);
+    return redirect()->route('home-admin')->with('success', 'Book updated successfully!');
+}
 
 
     public function showCollection(){
@@ -178,47 +238,10 @@ class BookController extends Controller
         return view('admin.editbook', compact('book', 'categories' , 'formats'));
     }
 
-    public function update (Request $request, $id){
-
-        $request->validate([
-            'Title'=> 'required|unique:books,Title,except,id',
-            'PubDate'=> 'required',
-            'Author'=> 'required|min:5',
-            'ISBN'=> 'required|min:13|integer',
-            'Publisher'=> 'required|min:5',
-            'PrintWeight'=> 'required|min:3',
-            'PrintWidth'=> 'required|min:3',
-            'PrintLength'=> 'required|min:3',
-            'Page'=> 'required|integer|gt:15',
-            'Stock'=> 'required|integer|gt:0',
-            'Image'=> 'required|mimes:png,jpg,jpeg'
-        ]);
-
-        $extension = $request->file('Image')->getClientOriginalExtension();
-        $fileName = $request->Title.'_'.$request->Author.'.'.$extension;
-        $request->file('Image')->storeAs('/public/image', $fileName);
-
-        Book::findOrFail($id)->update([
-            'Title'=> $request->Title,
-            'PublicationDate'=> $request->PubDate,
-            'Author'=> $request->Author,
-            'ISBN'=> $request->ISBN,
-            'Publisher'=> $request->Publisher,
-            'PrintWeight'=> $request->PrintWeight,
-            'PrintWidth'=> $request->PrintWidth,
-            'PrintLength'=> $request->PrintLength,
-            'Page'=> $request->Page,
-            'Category_Id'=> $request->CategoryName,
-            'Format_Id'=> $request->FormatName,
-            'Stock'=> $request->Stock,
-            'Image'=> $fileName
-        ]);
-        return redirect('/dashboard');
-    }
 
     public function delete($id){
         Book::destroy($id);
-        return redirect('/dashboard');
+        return redirect('/dashboard-admin');
     }
 
 

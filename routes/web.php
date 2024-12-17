@@ -48,11 +48,12 @@ Route::post('/store-book', [BookController::class, 'storeBook']);
 
 Route::get('/detail-book/edit/{book}', [BookController::class, 'edit'])->name('editbook');
 
-Route::patch('/update-book/{book}', [BookController::class, 'update'])->name('update');
+Route::put('/update-book/{book}', [BookController::class, 'update'])->name('book.update');
 
 Route::delete('/delete-book/{book}', [BookController::class, 'delete'])->name('deletebook');
 
 Route::get('/create-category', [CategoryController::class, 'createCategory'])->name('createcategory');
+Route::post('/store-category', [CategoryController::class, 'storeCategory']);
 
 Route::get('/collection', [BookController::class, 'show'])->name('custhome');
 
@@ -60,15 +61,11 @@ Route::get('/detail-book/{book}', [BookController::class, 'showBook'])->name('bo
 Route::get('/book-detail/{book}', [BookController::class, 'showBookUser'])->name('bookdetail-user');
 Route::get('/book-details/{book}', [BookController::class, 'showBookGuest'])->name('bookdetail-guest');
 
-Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home.guest'); 
+Route::get('/guestnavbar', [BookController::class, 'indexguest'])->name('home.guest');
 
 Route::get('/guestsearch', [BookController::class, 'guestSearch'])->name('guestsearch'); //JALAN
 
 Route::get('/categoryguest/{Category_Id?}', [BookController::class, 'guestCategory'])->name('categoryguest'); //JALAN
-
-Route::get('cart-test' , function(){
-    return view('user/cartV2');
-}) -> name('cart');
 
 
 

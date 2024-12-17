@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    
+
     <h2>New Releases ({{ now()->year }})</h2>
     @if($newReleases->count() > 0)
         <div class="row">
@@ -45,7 +45,7 @@
         <div class="row">
             @foreach($bestSellers as $book)
                 <div class="col-md-2">
-                    <a href="{{ route('bookdetail', $book->id) }}" class="text-decoration-none">
+                    <a href="{{ route('bookdetail-user', $book->id) }}" class="text-decoration-none">
                     <div class="card">
                         <img src="{{ asset('images/' . $book->Image) }}" class="card-img-top" alt="{{ $book->Title }}">
                         <div class="card-body">

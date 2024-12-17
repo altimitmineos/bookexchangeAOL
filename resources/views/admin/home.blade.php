@@ -25,7 +25,7 @@
                             @foreach ($books as $book)
                                 <tr>
                                     <td>
-                                        <img src="{{ asset($book->Image) }}" alt="" width="80px">
+                                        <img src= "{{ asset('images/' . $book->Image) }}" alt="" width="80px">
                                     </td>
                                     <td>{{$book->Title}}</td>
                                     <td>{{$book->category->CategoryName}}</td>
@@ -35,7 +35,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    
+
                 </div>
                 {{ $books->links() }}
             </div>

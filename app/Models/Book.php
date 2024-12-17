@@ -32,7 +32,7 @@ class Book extends Model
 
     public function format()
     {
-        return $this->belongsTo(Format::class, 'Formats_Id');
+        return $this->belongsTo(Format::class, 'Format_Id');
     }
 
     public function readers(){

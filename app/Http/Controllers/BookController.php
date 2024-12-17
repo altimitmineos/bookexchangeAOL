@@ -17,47 +17,47 @@ class BookController extends Controller
         return view('admin.createbook', compact('categories', 'formats'));
     }
 
-    public function storeBook (Request $request){
+        public function storeBook(Request $request)
+        {
+            $request->validate([
+                'Title' => 'required|unique:books,Title',
+                'PublicationDate' => 'required|date',
+                'Author' => 'required|min:5',
+                'ISBN' => 'required|digits:13|integer',
+                'Publisher' => 'required|min:5',
+                'PrintWeight' => 'required|numeric|gt:2',
+                'PrintWidth' => 'required|numeric|gt:2',
+                'PrintLength' => 'required|numeric|gt:2',
+                'Page' => 'required|integer|gt:15',
+                'Cost' => 'required|numeric|gt:15',
+                'Stock' => 'required|integer|gt:0',
+                'Image' => 'required|mimes:png,jpg,jpeg',
+                'Category_Id' => 'required|exists:categories,id',
+                'Format_Id' => 'required|exists:formats,id', // Ensure Format_Id exists in formats table
+            ]);
 
-        $request->validate([
-            'Title'=> 'required|unique:books,Title',
-            'PublicationDate'=> 'required|date',
-            'Author'=> 'required|min:5',
-            'ISBN'=> 'required|digits:13|integer',
-            'Publisher'=> 'required|min:5',
-            'PrintWeight'=> 'required|integer|gt:15',
-            'PrintWidth'=> 'required|integer|gt:15',
-            'PrintLength'=> 'required|integer|gt:15',
-            'Page'=> 'required|integer|gt:15',
-            'Cost'=> 'required|numeric|gt:15',
-            'Stock'=> 'required|integer|gt:0',
-            'Image'=> 'required|mimes:png,jpg,jpeg'
-        ]);
-    
-        $extension = $request->file('Image')->getClientOriginalExtension();
-        $fileName = $request->Title.'_'.$request->Author.'.'.$extension;
-        $request->file('Image')->storeAs('public/image', $fileName);
-    
-        Book::create([
-            'Title'=> $request->Title,
-            'PublicationDate'=> $request->PublicationDate,
-            'Author'=> $request->Author,
-            'ISBN'=> $request->ISBN,
-            'Publisher'=> $request->Publisher,
-            'PrintWeight'=> $request->PrintWeight,
-            'PrintWidth'=> $request->PrintWidth,
-            'PrintLength'=> $request->PrintLength,
-            'Page'=> $request->Page,
-            'Category_Id'=> $request->Category_Id,
-            'Format_Id'=> $request->Format_Id,
-            'Cost'=> $request->Cost,
-            'Stock'=> $request->Stock,
-            'Image'=> $fileName
-        ]);
-    
-        return redirect()->route('dashboard-admin');
-    }
+            $imageName = time().'.'.$request->Image->extension();
+            $request->Image->move(public_path('images'), $imageName);
 
+            Book::create([
+                'Title' => $request->Title,
+                'PublicationDate' => $request->PublicationDate,
+                'Author' => $request->Author,
+                'ISBN' => $request->ISBN,
+                'Publisher' => $request->Publisher,
+                'PrintWeight' => $request->PrintWeight,
+                'PrintWidth' => $request->PrintWidth,
+                'PrintLength' => $request->PrintLength,
+                'Page' => $request->Page,
+                'Category_Id' => $request->Category_Id,
+                'Format_Id' => $request->Format_Id, // Add Format_Id here
+                'Cost' => $request->Cost,
+                'Stock' => $request->Stock,
+                'Image' => $imageName
+            ]);
+
+            return redirect()->route('home-admin');
+        }
 
 
     public function showCollection(){
@@ -67,8 +67,8 @@ class BookController extends Controller
         if(request()->has('search')){
             $books = $books->where('Title', 'like', '%'.request()->get('search', '').'%');
         }
-        
-        return view('admin.home', ['books'=>$books->paginate(5)] ); 
+
+        return view('admin.home', ['books'=>$books->paginate(5)] );
     } //ADMIN - SHOW COLECTION
 
     public function showBook($id){
@@ -104,9 +104,9 @@ class BookController extends Controller
         if(request()->has('search')){
             $books = Book::where('Title', 'LIKE', '%'.request()->get('search', '').'%');
         }
-        
-        return view('user.searchpageuser', ['books'=>$books->paginate(5)]); 
-    } 
+
+        return view('user.searchpageuser', ['books'=>$books->paginate(5)]);
+    }
 
 
     public function indexguest(){
@@ -128,9 +128,9 @@ class BookController extends Controller
         if(request()->has('search')){
             $books = Book::where('Title', 'LIKE', '%'.request()->get('search', '').'%');
         }
-        
-        return view('guest.searchpageguest', ['books'=>$books->paginate(5)]); 
-    } 
+
+        return view('guest.searchpageguest', ['books'=>$books->paginate(5)]);
+    }
 
     public function userCategory($category_id=0){
 
@@ -138,7 +138,7 @@ class BookController extends Controller
 
         if($category_id >= 1){
             $books = Book::where('Category_Id', $category_id);
-        }   
+        }
         $categories = category::all();
 
         $datas=[
@@ -155,7 +155,7 @@ class BookController extends Controller
 
         if($category_id >= 1){
             $books = Book::where('Category_Id', $category_id);
-        }   
+        }
         $categories = category::all();
 
         $datas=[

@@ -66,6 +66,10 @@ Route::get('/guestsearch', [BookController::class, 'guestSearch'])->name('guests
 
 Route::get('/categoryguest/{Category_Id?}', [BookController::class, 'guestCategory'])->name('categoryguest'); //JALAN
 
+Route::get('cart-test' , function(){
+    return view('user/cartV2');
+}) -> name('cart');
+
 
 
     Route::middleware('auth')->group(function () {
@@ -85,7 +89,7 @@ Route::get('/categoryguest/{Category_Id?}', [BookController::class, 'guestCatego
         Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('cart.checkout');
     });
 
-Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home'); 
+Route::get('/usernavbar', [BookController::class, 'indexuser'])->name('home');
 
 Route::get('/usersearch', [BookController::class, 'userSearch'])->name('usersearch'); //JALAN
 

@@ -21,12 +21,12 @@ return new class extends Migration
             $table->string('Author');
             $table->string('ISBN');
             $table->string('Publisher');
-            $table->string('PrintWeight');
-            $table->string('printWidth');
-            $table->string('printLength');
+            $table->float('PrintWeight');
+            $table->float('printWidth');
+            $table->float('printLength');
             $table->integer('Page');
             $table->foreignId('Category_Id');
-            $table->foreignId('Formats_Id');
+            $table->foreignId('Format_Id');
             $table->integer('Stock');
             $table->string('Image');
             $table->timestamps();

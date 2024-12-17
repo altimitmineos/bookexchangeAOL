@@ -12,42 +12,40 @@
                             @csrf
                             <div class="mb-4">
                                 <label for="Category" class="form-label">Category</label>
-                                <select class="form-select" aria-label="Default select example" name="CategoryName">
+                                <select class="form-select" aria-label="Default select example" name="Category_Id"> <!-- changed name to Category_Id -->
                                     <option value="0">--Select a Category--</option>
-                                  @foreach ($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->CategoryName}}</option>
-                                  @endforeach
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->CategoryName }}</option>
+                                    @endforeach
                                 </select>
-                                @error('Category')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                @error('Category_Id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
                             <div class="mb-4">
                                 <label for="Format" class="form-label">Format</label>
-                                <select class="form-select" aria-label="Default select example" name="FormatName">
-                                    <option value="0">--Select Format--</option>
-                                  @foreach ($formats as $format)
-                                    <option value="{{$format->id}}">{{$format->FormatName}}</option>
-                                  @endforeach
+                                <select class="form-select" name="Format_Id">
+                                    <option value="0">--Select a Format--</option>
+                                    @foreach ($formats as $format)
+                                        <option value="{{ $format->id }}">{{ $format->FormatName }}</option>
+                                    @endforeach
                                 </select>
-                                @error('Format')
-                                    <div class="invalid-feedback">{{$message}}</div>
+                                @error('Format_Id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-
                             <div class="mb-4">
-                                <label for="formFile" class="form-label">Image</label>
-                                <input class="form-control @error('Image') is-invalid @enderror" type="file" id="formFile" name="Image">
+                                <label for="Image" class="form-label">Book Image</label>
+                                <input type="file" class="form-control" id="Image" name="Image" required>
                                 @error('Image')
-                                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-4">
                                 <label for="Title" class="form-label">Book Title</label>
-                                <input type="text" class="form-control @error('Title') is-invalid @enderror"  
-                                    id="Title" name="Title" value="{{old('Title')}}" 
+                                <input type="text" class="form-control @error('Title') is-invalid @enderror"
+                                    id="Title" name="Title" value="{{old('Title')}}"
                                     placeholder="Enter movie title">
                                 @error('title')
                                 <div class="alert alert-danger" role="alert">{{$message}}</div>
@@ -122,6 +120,13 @@
                                 <label for="exampleInputPassword1" class="form-label">Cost</label>
                                 <input type="decimal" value="{{old('Cost')}}" class="form-control @error('Cost') is-invalid @enderror" id="exampleInputPassword1" name="Cost">
                                 @error('Cost')
+                                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
+                                <label for="exampleInputPassword1" class="form-label">Page</label>
+                                <input type="text" value="{{old('Page')}}" class="form-control @error('Cost') is-invalid @enderror" id="exampleInputPassword1" name="Page">
+                                @error('Page')
                                 <div class="alert alert-danger" role="alert">{{$message}}</div>
                                 @enderror
                             </div>

@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $book->Title }}</h5>
                             <p class="card-text">{{ $book->Author }}</p>
-                            <p class="card-text">{{ $book->Cost }}</p>
+                            <p class="card-text">Rp{{ number_format($book->Cost, 0, ',', '.') }}</p>
                         </div>
                     </div>
                 </a>
@@ -27,6 +27,6 @@
             {{ $books->links() }}
         </div>
     </div>
-    
+
 </div>
 @endsection

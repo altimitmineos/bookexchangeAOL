@@ -27,6 +27,6 @@
             {{ $books->links() }}
         </div>
     </div>
-    
+
 </div>
 @endsection
